@@ -1,3 +1,5 @@
+
+// Hello all
 function validateForm() {
     let firstName = document.getElementById('first_name');
     let lastName = document.getElementById('last_name');
