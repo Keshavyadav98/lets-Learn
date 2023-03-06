@@ -1,0 +1,603 @@
+<html>
+
+<head>
+    <!--  ----------------------------------------------------------------------  -->
+    <!--  NOTE: Please add the following <META> element to your page <HEAD>.      -->
+    <!--  If necessary, please modify the charset parameter to specify the        -->
+    <!--  character set of your HTML page.                                        -->
+    <!--  ----------------------------------------------------------------------  -->
+    <link rel="stylesheet" href="refrelUI.css">
+    <link href="https://fonts.cdnfonts.com/css/gotham" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.31/sweetalert2.css">
+    <script type="text/javascript" src="./refrelUI.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.31/sweetalert2.min.js"></script>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfvGTcK3UmxfU8KmTs89lTQi7xrBoITl8&libraries=places&callback=initAutocomplete"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+
+    <!-- <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script> -->
+    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+</head>
+<!--  ----------------------------------------------------------------------  -->
+<!--  NOTE: Please add the following <FORM> element to your page.             -->
+<!--  ----------------------------------------------------------------------  -->
+<body onload="myFunction()">
+<form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST"
+    onsubmit="return validateForm()" onload="resetForm()">
+    <!-- https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8 -->
+    <input type=hidden name="oid" value="00D8N0000008fn5">
+    <input type=hidden name="retURL" value="https://www.safetylabs.org/web2leadsubmit.html">
+
+    <!--  ----------------------------------------------------------------------  -->
+    <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+    <!--  these lines if you wish to test in debug mode.                          -->
+    <!--  <input type="hidden" name="debug" value=1>                              -->
+    <!--  <input type="hidden" name="debugEmail" value="consultants@consultch.com">-->
+    <!--  ----------------------------------------------------------------------  -->
+    <div>
+    <div id="refferalTitle">MAKE A REFERRAL</div>
+    <div id="refrelForm">
+        <div id="imageSection">
+            <img src="transitionNew1.png" />
+        </div>
+        <div id="formSection">
+            <fieldset class="personalInformation">
+                <legend style="color: #919191; text-align:center;">MAKING A REFERRAL FOR</legend>
+                <div class="nameSection">
+                    <div>
+                        <label for="first_name">First Name*</label>
+                        <input id="first_name" onkeydown="return /[a-z ]/i.test(event.key)" placeholder="First Name" maxlength="40"  name="first_name" type="text" />
+                    </div>
+                    <div>
+                        <label for="last_name">Last Name*</label>
+                        <input id="last_name" onkeydown="return /[a-z ]/i.test(event.key)" maxlength="80" placeholder="Last Name"  name="last_name" type="text" />
+                    </div>
+                    <div>
+                        <label> Birth Date*</label>
+                        <span class="dateInput dateOnlyInput"><input id="00N8Z00000CFBru"  placeholder="mm-dd-yyyy"  onclick="currentDate()" class="dateOfBirth"  name="00N8Z00000CFBru" max="1950/01/11" type="Date" data-date="" data-date-format="YYYY-MM-DD" /></span>
+                    </div>
+                    <div>
+                        <label>Gender*</label>
+                        <select id="00N8Z00000CFBs5" class="gender" name="00N8Z00000CFBs5" title="Gender">
+                            <option value="">Select</option>
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- <div class="DOB_Gender">
+                </div> -->
+                <div class="addrLeadSource">
+                   
+                    <div>
+                        <label for="email">Email</label>
+                        <input  id="email" maxlength="80" name="email" type="email" placeholder="Email Address" />
+                    </div>
+                    <div>
+                        <label>Residency Type</label>
+                        <select id="00N8N000003LKzV" class="personComForm" name="00N8N000003LKzV"
+                            title="Person Completing This Form">
+                            <option value="">Select</option>
+                            <option value="Self">Self</option>
+                            <option value="Family Member">Family Member</option>
+                            <option value="Provider">Provider</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>                    
+                    <div>
+                        <label for="street">Street*</label>
+                        <input onFocus="geolocate1()" onkeydown="makeInputsEmpty1()" name="street" placeholder="Street" class="street" id="street"></input>
+                    </div>
+                    <div>
+                        <label for="city">City*</label>
+                        <input id="city" maxlength="30" placeholder="City" name="city" type="text" />
+                    </div>
+                </div>
+                <div class="addressArea">
+
+                    <div>
+                                <label for="state_code">State/Province*</label>
+                                <input id="state_code" name="state_code" placeholder="State & province">
+
+                    </div>
+                    <div>
+                        <label for="zip">Zip Code*</label>
+                        <input id="zip" maxlength="7" name="zip" placeholder="Zip code" type="text" />
+                    </div>
+                    <input type=hidden id="country_code" name="country_code" value="US"> <div>
+                        <label for="phone">Phone</label>
+                        <input id="phone" onKeyPress="if(this.value.length==10) return false;" name="phone" class="specilChar" placeholder="Phone Number" type="number" />
+                    </div>
+                    <div>
+                        <label>Service Line*</label>
+                        <select id="00N8Z00000CFM89" class="serviceLine" name="00N8Z00000CFM89" title="Service Line">
+                            <option value="">Select</option>
+                            <option value="Hospice">Hospice</option>
+                            <option value="Primary/Palliative">Primary/Palliative</option>
+                            <option value="Wound">Wound</option>
+                            <option value="Podiatry">Podiatry</option>
+                            <option value="DME">DME</option>
+                            <option value="Primary">Primary</option>
+                            <option value="Palliative">Palliative</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- <div class="addressPin">
+                </div> -->
+                <div class="addressComForm2">
+                        <div>
+                        <div><label>Reason for Referral</label></div>
+                        <textarea  id="00N8N000007Bnkm" maxlength="255" name="00N8N000007Bnkm" style="height: 2%; width:100%" type="text"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+            
+            <fieldset class="addressInfo">
+                <legend style="color:#919191;">Referral Creator</legend>
+            
+                <div class="addressComForm">
+                    <div>
+                        <div><label>Name*</label></div>
+                        <div><input id="00N8Z00000CFBsQ" class="personComForm" onkeydown="return /[a-z ]/i.test(event.key)" name="00N8Z00000CFBs0" placeholder="Full Name">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div><label for="phone">Phone*</label></div>
+                        <div><input id="00N8Z00000CFBsR" name="00N8Z00000CFBsR" class="specilChar" onKeyPress="if(this.value.length==10) return false;"
+                                type="number" placeholder="Phone Number"/></div>
+                    </div>
+                    <div>
+                        <div><label for="lead_source">Lead Source*</label></div>
+                        <div><select id="lead_source" name="lead_source">
+                            <option value="">Select</option>
+                            <option value="Advertisement">Advertisement</option>
+                            <option value="Customer Event">Customer Event</option>
+                            <option value="Employee Referral">Employee Referral</option>
+                            <option value="External Referral">External Referral</option>
+                            <option value="Google AdWords">Google AdWords</option>
+                            <option value="Other">Other</option>
+                            <option value="Partner">Partner</option>
+                            <option value="Purchased List">Purchased List</option>
+                            <option value="Trade Show">Trade Show</option>
+                            <option value="Webinar">Webinar</option>
+                            <option value="Website">Website</option>
+                            <option value="Provider">Provider</option>
+                        </select></div>
+                    </div>
+                </div>
+
+           
+
+
+</fieldset>
+            <fieldset class="medicalInfo">
+                <legend style="color:#919191;">Insurance  Information</legend>
+                    <div>
+                    <div class="insuranceD">
+                        <label>Do you have Insurance*</label>
+                        <select class="insuranceH" id="insurance" onchange="insuranceSelect()" title="Insurance Question">
+                            <option value="">Select</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="primaryInsue">
+                        <label>Primary Insurance Provider</label>
+                        <input id="00N8Z00000CFBsH"  maxlength="255" class="primaryInsurance" name="00N8Z00000CFBsH" type="text" disabled/>
+                    </div>
+                <div class="insurance">
+                            <label>Insurance Group ID</label>
+                            <input id="00N8Z00000CFBs7" maxlength="32" name="00N8Z00000CFBs7" class="insuranceGroupId" type="text" disabled/>
+                        </div>
+                </div>
+                        <div>
+                    <!-- <div class="InsuranceMember">
+                    </div> -->
+                    <div class="medicalContact">
+                        <div>
+                            <label>Insurance Member ID<label />
+                                <input id="00N8Z00000CFBs8" maxlength="32" name="00N8Z00000CFBs8" class="insuranceMemberId" type="text" disabled/>
+                        </div>
+                        <div>
+                            <label for="phone">Payer Phone</label>
+                            <input id="Plan_Phone_Number__c" onKeyPress="if(this.value.length==10) return false;" name="Plan_Phone_Number__c" type="number" disabled/>
+                        </div>
+
+                        <div>
+                            <label>Medicaid Number</label>
+                            <input id="00N8Z00000CFMXG" maxlength="255" name="00N8Z00000CFMXG" class="medicaidNumber"  type="text"  disabled/>
+                        </div>
+                        <div>
+                            <label>Medicare Number</label>
+                            <input id="00N8Z00000CFMXK" maxlength="255" name="00N8Z00000CFMXK" class="medicareNumber" type="text" disabled/>
+                        </div>
+                    </div>
+
+            </fieldset>
+
+            
+            <fieldset class="addressInfo">
+                        
+                        <legend style="color:#919191;">Power Of Attorney (POA)</legend>
+                        
+                            <div class="addressComForm">
+                                <div class="poaTony">
+                                    <label>Do you have a POA</label>
+                                    <select id="fillingOk" id="insurance" onchange="fillPoa()" title="Insurance Question">
+                                        <option value="">Select</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>Name</label>
+                                    <input id="00N8Z00000CFMXF" onkeydown="return /[a-z ]/i.test(event.key)" class="personComForm" name="00N8Z00000CFMXF" class="specilChar" placeholder="Full Name" disabled />
+                                </div>
+                                
+                                <div>
+                                    <div><label>Email</label></div>
+                                    <div><input id="00N8N0000079suz" type="email" class="serviceLine" name="00N8N0000079suz" placeholder="Email Address" disabled />
+                                    </div>
+                                </div>
+                                <div>
+                                    <div><label for="phone">Phone</label></div>
+                                    <div><input id="00N8Z00000CFMXI" class="specilChar" onKeyPress="if(this.value.length==10) return false;" name="00N8Z00000CFMXI" type="number" placeholder="Phone Number" disabled/></div>
+                                </div>
+                            </div>
+
+                            <div class="addressArea">
+                                <div>
+                                    <div><label for="street">Street</label></div>
+                                    <div><input id="00N8N0000079sv4" onFocus="geolocate2()"
+                                            onkeydown="makeInputsEmpty2()" name="00N8N0000079sv4" class="Street" disabled></input></div>
+                                </div>
+                                <div>
+                                    <div><label for="city">City</label></div>
+                                    <div><input id="00N8N0000079sv9" name="00N8N0000079sv9" maxlength="30"
+                                            placeholder="City" name="city" type="text"  disabled/></div>
+                                </div>
+                                <input type=hidden id="country_code" name="country_code" value="US disabled">
+
+                                <div>
+                                    <div><label for="state_code">State</label></div>
+                                    <div><input id="00N8N0000079svE" name="00N8N0000079svE" placeholder="State" disabled></div>
+                                </div>
+                                <div>
+                                    <div><label for="zip">Zip Code</label></div>
+                                    <div><input id="00N8N0000079svJ" name="00N8N0000079svJ" maxlength="7"
+                                            placeholder="Zip code" type="text" disabled /></div>
+                                </div>
+
+                            </div>
+                            <!-- <div class="addressPin">
+
+                            </div> -->
+                     
+                        </fieldset>
+                        <fieldset class="addressInfo">
+                            <legend style="color:#919191;">Emergency Contact<input onclick="copyAddrress()" id="sameAsAttorney" type="checkbox"><span style="margin-left:.5em;color: purple;">Same as POA</span> </legend>
+                        
+                            <div class="addressComForm">
+                                <div>
+                                    <div><label>First Name</label></div>
+                                    <div><input id="00N8Z00000CFBs0" class="personComForm" onkeydown="return /[a-z ]/i.test(event.key)" name="00N8Z00000CFBs0" placeholder="First Name">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div><label>Last Name</label></div>
+                                    <div><input id="00N8Z00000CFBs1" class="personComForm" onkeydown="return /[a-z ]/i.test(event.key)" name="00N8Z00000CFBs1" placeholder="Last Name">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div><label>Email</label></div>
+                                    <div><input type="email" id="00N8N0000079sua" class="serviceLine" name="00N8N0000079sua" placeholder="Email Address">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="addressArea">
+                                
+                                <div>
+                                    <div><label for="phone">Phone</label></div>
+                                    <div><input id="00N8Z00000CFBs2" name="00N8Z00000CFBs2" class="specilChar" onKeyPress="if(this.value.length==10) return false;"
+                                            type="number" placeholder="Phone Number"/></div>
+                                </div>
+                                <div>
+                                    <div><label for="street">Street</label></div>
+                                    <div><input id="00N8N0000079suf" onFocus="geolocate3()"
+                                            onkeydown="makeInputsEmpty3()" name="00N8N0000079suf" class="Street"></div>
+                                </div>
+                                <div>
+                                    <div><label for="city">City</label></div>
+                                    <div><input id="00N8N0000079suk" name="00N8N0000079suk" maxlength="30"
+                                            placeholder="City" name="city" type="text" /></div>
+                                </div>
+                                <input type=hidden id="country_code" name="country_code" value="US">
+                            </div>
+                            <div class="addressArea">
+                                <div>
+                                    <div><label for="state_code">State</label></div>
+                                    <div><input id="00N8N0000079suu" name="00N8N0000079suu" placeholder="State">
+
+                                    </div>
+                                </div>
+                                <div>
+                                    <div><label for="zip">Zip</label></div>
+                                    <div><input id="00N8N0000079sup" name="00N8N0000079sup" maxlength="7"
+                                            placeholder="Zip code" type="text" /></div>
+                                </div>
+                                
+                                <div>
+                                    <div><label for="street">Relationship </label></div>
+                                    <div><input id="00N8Z00000CFBs3" onFocus="geolocate3()"
+                                            onkeydown="makeInputsEmpty3()" name="00N8Z00000CFBs3" placeholder="Relation" class="Street"></div>
+                                </div>
+
+                            </div>
+
+                       
+
+
+            </fieldset>
+            <fieldset class="addressInfo">
+                <legend style="color:#919191;">Care Coordinator </legend>
+            
+                <div class="careCodioner">
+                    <div>
+                        <div><label>Are you a Transitions Employee</label></div>
+                        <div><select id="transtionEmployee" id="insurance" onchange="fillPoa()" title="Insurance Question">
+                            <option value="">Select</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                        </div>
+                    </div>
+                        <div>
+                            <div><label for="zip">Marketer</label></div>
+                            <textarea id="00N8N000007Bnkm" style="width:100%; height:50%"  name="00N8N000007Bnkm" maxlength="7"
+                                type="text"></textarea>
+                        </div>
+                </div>
+            </fieldset>
+
+            <input type="submit" onclick="submitForm()" class="submitButton" name="submit">
+        </div>
+    </div>
+        </div>
+</form>
+
+    <script>
+
+        $('.specilChar').on('input', function() {
+            $(this).val($(this).val().replace(/[^a-z0-9]/gi,''));
+          });
+
+
+
+        $(".dateOfBirth").on("change", function() {
+    this.setAttribute(
+        "data-date",
+        moment(this.value, "YYYY-MM-DD")
+        .format( this.getAttribute("data-date-format") )
+    )
+    
+}).trigger("change")
+        /* var componentForm = {   // keys are ids of element 
+             locality: 'long_name',
+             administrative_area_level_1: 'short_name',
+             country: 'long_name',
+             country_code: 'long_name',
+             postal_code: 'short_name'
+ 
+             
+         };*/
+
+        var placeSearch, autocomplete1, autocomplete2, autocomplete3;
+        var mainComponent;
+
+        
+        componentForm = {
+            locality: {
+                eleId: "city",
+                nameLength: "long_name"
+            },
+            administrative_area_level_1: {
+                eleId: "state_code",
+                nameLength: 'short_name',
+            },
+            postal_code: {
+                eleId: "zip",
+                nameLength: 'short_name',
+            }
+        };
+
+        componentPoa = {
+            locality: {
+                eleId: "00N8N0000079sv9",
+                nameLength: "long_name"
+            },
+            administrative_area_level_1: {
+                eleId: "00N8N0000079svE",
+                nameLength: 'short_name',
+            },
+            postal_code: {
+                eleId: "00N8N0000079svJ",
+                nameLength: 'short_name',
+        }
+        };
+
+        componentEmergency = {
+            locality: {
+                eleId: "00N8N0000079suk",
+                nameLength: "long_name"
+            },
+            administrative_area_level_1: {
+                eleId: "00N8N0000079suu",
+                nameLength: 'short_name',
+            },
+            postal_code: {
+                eleId: "00N8N0000079sup",
+                nameLength: 'short_name',
+            }
+        };
+
+
+
+
+        google.maps.event.addDomListener(window, 'load', initAutocomplete);
+
+        function initAutocomplete() {
+            // autocomplete = new google.maps.places.Autocomplete((document.getElementById('street')), { types: ['geocode'] });
+            autocomplete1 = new google.maps.places.Autocomplete((document.getElementById('street')), { types: ['geocode'] });
+            autocomplete2 = new google.maps.places.Autocomplete((document.getElementById('00N8N0000079sv4')), { types: ['geocode'] });
+            autocomplete3 = new google.maps.places.Autocomplete((document.getElementById('00N8N0000079suf')), { types: ['geocode'] });
+            // When the user selects an address from the dropdown, populate the address fields in the form.
+            autocomplete1.addListener('place_changed', fillInAddress1);
+            autocomplete2.addListener('place_changed', fillInAddress2);
+            autocomplete3.addListener('place_changed', fillInAddress3);
+
+        }
+
+        function fillInAddress1() {  // From google api
+            var place = autocomplete1.getPlace();
+
+            let street = document.getElementById("street").value;
+            const parts = street.split(',');
+            document.getElementById("street").value = parts.slice(0, 3).join(',');
+
+            // Get each component of the address from the place details and fill the corresponding field on the form.
+            for (let i = 0; i < place.address_components.length; i++) {
+                // var city = place.address_components.types=="locality" ?city: "undefined";
+                // document.getElementById("locality").value = city.long_name;
+                let addressType = place.address_components[i].types[0];
+                if (componentForm[addressType]) {   // if the component have the id same as the loca
+                    console.log("Working for type: ", addressType);
+                    let addressSectionValue = place.address_components[i][componentForm[addressType].nameLength];
+                    console.log("======")
+                    console.log(addressSectionValue);
+
+                    if (document.getElementById(componentForm[addressType].eleId))
+                        document.getElementById(componentForm[addressType].eleId).value = addressSectionValue;
+                }
+            }
+        }
+            
+
+        // for P.O.A
+        function fillInAddress2() {  // From google api
+            var place = autocomplete2.getPlace();
+
+            let street = document.getElementById("00N8N0000079sv4").value;
+            const parts = street.split(',');
+            document.getElementById("00N8N0000079sv4").value = parts.slice(0, 3).join(',');
+
+            // Get each component of the address from the place details and fill the corresponding field on the form.
+            for (let i = 0; i < place.address_components.length; i++) {
+                // var city = place.address_components.types=="locality" ?city: "undefined";
+                // document.getElementById("locality").value = city.long_name;
+                let addressType = place.address_components[i].types[0];
+                if (componentPoa[addressType]) {   // if the component have the id same as the loca
+                    console.log("Working for type: ", addressType);
+                    let addressSectionValue = place.address_components[i][componentPoa[addressType].nameLength];
+                    console.log("======")
+                    console.log(addressSectionValue);
+
+                    if (document.getElementById(componentPoa[addressType].eleId))
+                        document.getElementById(componentPoa[addressType].eleId).value = addressSectionValue;
+                }
+            }
+        }
+
+        // for emergency
+
+        function fillInAddress3() {  // From google api
+            var place = autocomplete3.getPlace();
+
+            let street = document.getElementById("00N8N0000079suf").value;
+            const parts = street.split(',');
+            document.getElementById("00N8N0000079suf").value = parts.slice(0, 3).join(',');
+
+
+            // Get each component of the address from the place details and fill the corresponding field on the form.
+            for (let i = 0; i < place.address_components.length; i++) {
+                // var city = place.address_components.types=="locality" ?city: "undefined";
+                // document.getElementById("locality").value = city.long_name;
+                let addressType = place.address_components[i].types[0];
+                if (componentEmergency[addressType]) {   // if the component have the id same as the loca
+                    console.log("Working for type: ", addressType);
+                    let addressSectionValue = place.address_components[i][componentEmergency[addressType].nameLength];
+                    console.log("======")
+                    console.log(addressSectionValue);
+            
+                    if (document.getElementById(componentEmergency[addressType].eleId))
+                        document.getElementById(componentEmergency[addressType].eleId).value = addressSectionValue;
+                }
+            }
+        }
+
+        // Bias the autocomplete object to the user's geographical location,
+        // as supplied by the browser's 'navigator.geolocation' object.
+        function geolocate1() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var geolocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    console.log(geolocation);
+                    var circle = new google.maps.Circle({
+                        center: geolocation,
+                        radius: position.coords.accuracy
+                    });
+                    autocomplete1.setBounds(circle.getBounds());
+                });
+
+            }
+        }
+
+        function geolocate2() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var geolocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    console.log(geolocation);
+                    var circle = new google.maps.Circle({
+                        center: geolocation,
+                        radius: position.coords.accuracy
+                    });
+                    autocomplete2.setBounds(circle.getBounds());
+                });
+
+            }
+        }
+
+        function geolocate3() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var geolocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    console.log(geolocation);
+                    var circle = new google.maps.Circle({
+                        center: geolocation,
+                        radius: position.coords.accuracy
+                    });
+                    autocomplete3.setBounds(circle.getBounds());
+                });
+                
+            }
+        }
+    </script>
+</body>
+
+</html>

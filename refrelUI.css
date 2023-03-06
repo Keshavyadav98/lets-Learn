@@ -1,0 +1,401 @@
+* {
+  font-family: "Gotham", sans-serif;
+  font-size: 15px;
+}
+
+::placeholder {
+  color: #878787;
+}
+
+body {
+  background-color: #efefef;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+input, select:focus{
+  outline: 0;
+}
+
+select{
+  cursor: pointer;
+}
+input,
+select {
+  padding: 3px 8px;
+  margin: 2px 0;
+  width: 100%;
+
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.dateOfBirth {
+    position: relative; 
+    height: 25px;
+    color: white;
+}
+
+.dateOfBirth:before {
+    position: absolute;
+    top: 3px; left: 3px;
+    content: attr(data-date);
+    display: inline-block;
+    color: black;
+}
+#sameAsAttorney{
+  width: auto;
+  margin-left: 1em;
+}
+.careCodioner{
+  display: flex;
+}
+.careCodioner > div {
+  display: inline-block;
+  padding: 0.5em;
+  width: 47%;
+}
+
+input::-webkit-datetime-edit, input::-webkit-inner-spin-button, input::-webkit-clear-button {
+    display: none;
+}
+
+input::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 3px;
+    right: 0;
+    color: black;
+    opacity: 1;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+#refferalTitle {
+  border-bottom: 1px solid#6e1e53;
+  color: black;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 25px;
+}
+
+#refrelForm {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  gap: 2em;
+   justify-content: space-around;
+}
+
+#imageSection {
+  position: relative;
+  min-width: 650px;
+  width: 0%;
+  /* background-color: #751a57; */
+  overflow: hidden;
+  border-radius: 1em;
+}
+
+#imageSection > img {
+  width: 100%;
+  min-height: 55vw;
+  border-radius: 2em;
+  margin-top:5%;
+  /* max-width: 450px; */
+}
+
+#formSection {
+  width: 50%;
+  color: purple;
+}
+
+/* Correct CSS */
+.personalInformation,
+.addressInfo,
+.medicalInfo {
+  border-radius: 5px;
+  border-color: lightgray;
+  margin-bottom: 13px;
+}
+
+.nameSection > div {
+  display: inline-block;
+  padding: 0.5em;
+  width: 47%;
+}
+.DOB_Gender > div {
+  display: inline-block;
+  padding: 0.5em;
+  width: 22%;
+}
+
+.addressArea{
+  display: flex;
+}
+
+.addressArea > div {
+  display: inline-block;
+  padding: 0.5em;
+  width: 47%;
+}
+.addressPin > div {
+  display: inline-block;
+  padding: 0.5em;
+  width: 30%;
+}
+
+.addressComForm,.Insurance,.medicalContact,.nameSection, .addrLeadSource{
+  display: flex;
+}
+
+.addressComForm > div, .addrLeadSource > div {
+  display: inline-block;
+  padding: 0.5em;
+  width: 47%;
+}
+.addressComForm2 > div {
+display: inline-block;
+padding: 0.5em;
+width: 48.3%;
+}
+.Insurance > div {
+  display: inline-block;
+  padding: 0.5em;
+  width: 47%;
+}
+.medicalContact > div {
+  display: inline-block;
+  padding: 0.5em;
+  width: 30%;
+}
+.InsuranceMember > div {
+  display: inline-block;
+  padding: 0.5em;
+  width: 47%;
+}
+
+.street {
+  width: 100%;
+  border: 1px solid #919191;
+  border-radius: 3%;
+}
+#city {
+  width: 98%;
+  border: 1px solid #919191;
+  border-radius: 3%;
+}
+
+#state_code {
+  width: 100%;
+  border: 1px solid #919191;
+  border-radius: 3%;
+}
+
+#zip {
+  width: 100%;
+  border: 1px solid #919191;
+  border-radius: 3%;
+}
+
+#phone {
+  width: 100%;
+  border: 1px solid #919191;
+  border-radius: 3%;
+}
+
+.personComForm {
+  width: 100%;
+  border: 1px solid #919191;
+  border-radius: 3%;
+}
+
+.serviceLine {
+  width: 98%;
+  border: 1px solid #919191;
+  border-radius: 3%;
+}
+.insuranceH {
+  width: 100%;
+  border: 1px solid #919191;
+  border-radius: 3%;
+}
+
+.insuranceGroupId {
+  width: 100%;
+  border: 1px solid #919191;
+  border-radius: 3%;
+}
+
+#Plan_Phone_Number__c {
+  width: 98%;
+  border: 1px solid #919191;
+  border-radius: 3%;
+}
+
+.primaryInsurance {
+  width: 98%;
+  border: 1px solid #919191;
+  border-radius: 1%;
+}
+
+.medicareNumber,
+.insuranceMemberId,
+.medicaidNumber {
+  width: 100%;
+  border: 1px solid #919191;
+  border-radius: 3%;
+}
+
+.leadSource{
+  display: inline-block;
+  width: 23%;
+  padding: 0.5em;
+}
+.emaiL{
+  display: inline-block;
+  padding: 0.5em;
+  width: 23%;
+}
+
+.facilityT{
+  display: inline-block;
+  padding: 0.5em;
+  width: 48%;
+}
+.insuranceD{
+  display: inline-block;
+  padding: 0.5em;
+  width: 23%;
+}
+.poaTony{
+  display: inline-block;
+  padding: 0.5em;
+  width: 23%;
+}
+
+.primaryInsue{
+  display: inline-block;
+  padding: 0.5em;
+  width: 49%;
+}
+.insurance{
+  display: inline-block;
+  /* padding: em; */
+  width: 23%;
+}
+.addressPin > div,
+.addressPin > div {
+  display: inline-block;
+  padding: 0.5em;
+}
+
+#first_name {
+  width: 100%;
+  border: 1px solid #919191;
+  border-radius: 3%;
+}
+
+#last_name {
+  width: 98%;
+  border: 1px solid #919191;
+  border-radius: 3%;
+}
+.dateOfBirth {
+  width: 100%;
+  border: 1px solid #919191;
+  border-radius: 3%;
+}
+
+.gender {
+  width: 99%;
+  border: 1px solid #919191;
+  border-radius: 3%;
+}
+
+.submitButton {
+  width: 20%;
+  height: 30px;
+  border-radius: 3%;
+  font-size: 20px;
+  color: white;
+  margin-left: 1em;
+  cursor: pointer;
+  background-color: #3b784b;
+  border: none;
+}
+
+@media screen and (max-width: 1210px) {
+  #refrelForm {
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-evenly; */
+  }
+  #formsection{
+    width: 100%;
+  }
+  .insurance{
+    width: 23% !important;
+  }
+  .primaryInsue{
+    width: 50% !important;
+  }
+  .facilityT{
+    width: 48.7% !important;
+  }
+}
+
+.Marketer > div{
+  display: inline-block;
+  padding: 0.5em;
+  width: 48.2%;
+}
+
+@media screen and (max-width: 1855px) {
+  .facilityT{
+    width: 46%;
+  }
+}
+@media screen and (max-width: 1450px) {
+  .facilityT{
+    width: 44%;
+  }
+}
+@media screen and (max-width: 1700px) {
+  .insurance{
+    width: 21%;
+  }
+  .primaryInsue{
+    width: 47%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .nameSection > div,
+  .addressArea > div,
+  .addressComForm > div,
+  .Insurance > div,
+   .InsuranceMember > div {
+    width: 45%;
+  }
+  .facilityT{
+    width: 43%;
+  }
+  @media screen and (max-width:1300px) {
+    .addressPin > div, 
+   .medicalContact  > div{
+    width: 27%;
+   }
+  }
+}
+.poaContainer{
+  border: 2px solid lightgray;
+  border-radius: 4px;
+}
